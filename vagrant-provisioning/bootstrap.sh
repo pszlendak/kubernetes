@@ -70,8 +70,20 @@ sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_
 systemctl reload sshd
 
 # Set Root password
-echo "[TASK 12] Set root password"
+echo "[TASK 12] Set root & vagrant password"
 echo "kubeadmin" | passwd --stdin root >/dev/null 2>&1
+echo "kubeadmin" | passwd --stdin vagrant >/dev/null 2>&1
 
 # Update vagrant user's bashrc file
 echo "export TERM=xterm" >> /etc/bashrc
+echo "alias k=kubectl" >> /etc/bashrc
+
+# Install utils 
+echo "[TASK 13] Install utilities"
+yum install -y -q xauth > /dev/null 2>&1
+yum install -y -q tmux > /dev/null 2>&1
+
+# Start NTP
+echo "[TASK 14] Starting NTP"
+systemctl enable ntpd > /dev/null 2>&1
+systemctl start ntpd > /dev/null 2>&1

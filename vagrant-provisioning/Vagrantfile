@@ -6,6 +6,11 @@ ENV['VAGRANT_NO_PARALLEL'] = 'yes'
 Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", path: "bootstrap.sh"
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  config.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--cableconnected1", "on"]
+  end
 
   # Kubernetes Master Server
   config.vm.define "kmaster" do |kmaster|
@@ -22,7 +27,7 @@ Vagrant.configure(2) do |config|
     kmaster.vm.provision "shell", path: "bootstrap_kmaster.sh"
   end
 
-  NodeCount = 2
+  NodeCount = 3
 
   # Kubernetes Worker Nodes
   (1..NodeCount).each do |i|

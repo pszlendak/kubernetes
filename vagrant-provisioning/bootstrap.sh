@@ -84,6 +84,7 @@ yum install -y -q xauth > /dev/null 2>&1
 yum install -y -q tmux > /dev/null 2>&1
 
 # Start NTP
-echo "[TASK 14] Starting NTP"
+echo "[TASK 14] Install NTP server"
+yum install -y -q ntp
 systemctl enable ntpd > /dev/null 2>&1
 systemctl start ntpd > /dev/null 2>&1

@@ -82,6 +82,7 @@ echo "alias k=kubectl" >> /etc/bashrc
 echo "[TASK 13] Install utilities"
 yum install -y -q xauth > /dev/null 2>&1
 yum install -y -q tmux > /dev/null 2>&1
+yum install -y -q vim > /dev/null 2>&1
 
 # Start NTP
 echo "[TASK 14] Install NTP server"

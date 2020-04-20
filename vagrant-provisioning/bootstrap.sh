@@ -88,3 +88,8 @@ echo "[TASK 14] Install NTP server"
 yum install -y -q ntp
 systemctl enable ntpd > /dev/null 2>&1
 systemctl start ntpd > /dev/null 2>&1
+
+# Install git
+echo "[TASK 15] Install git"
+yum install -y -q git
+

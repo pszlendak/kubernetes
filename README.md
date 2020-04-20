@@ -7,5 +7,5 @@ vagrant up
 # Deploy services
 ```
 vagrant ssh kmaster
-. deploy_services.sh
+deploy_services.sh
 ```

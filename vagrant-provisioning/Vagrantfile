@@ -41,6 +41,19 @@ Vagrant.configure(2) do |config|
         v.cpus = 1
         # Prevent VirtualBox from interfering with host audio stack
         v.customize ["modifyvm", :id, "--audio", "none"]
+
+        # Create & attach disk unless exists
+        file_to_disk = v.name + "_disk.vmdk"
+        disk_size_gb = 2048 * 10
+        unless File.exist?(file_to_disk)
+          # Create & attach disk
+          v.customize [ "createmedium", "disk", "--filename", file_to_disk, 
+                        "--format", "vmdk", "--size", disk_size_gb ]
+        end
+        # FIXME: consider using SATA controller as it is faster
+        v.customize [ "storageattach", v.name , "--storagectl", 
+                      "IDE", "--port", "1", "--device", "0", "--type", 
+                      "hdd", "--medium", file_to_disk]
       end
       workernode.vm.provision "shell", path: "bootstrap_kworker.sh"
     end

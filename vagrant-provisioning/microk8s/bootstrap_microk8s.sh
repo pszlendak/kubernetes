@@ -10,7 +10,7 @@ echo "[TASK 3] Set kubectl alias for microk8s kubectl"
 echo "alias kubectl='microk8s kubectl'" >> ~/.bash_aliases
 
 echo "[TASK 4] Wait till microk8s is ready ..."
-microk8s status --wait-ready
+sudo microk8s status --wait-ready
 
 echo "[DONE] microk8s is ready!"
 
